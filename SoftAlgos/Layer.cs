@@ -35,6 +35,13 @@ namespace SoftAlgos {
 			throw new System.NotImplementedException ();
 		}
 		#endregion
+		#region IPaintable implementation
+		public void Paint (Cairo.Context context)
+		{
+			throw new System.NotImplementedException ();
+		}
+		#endregion
+
 
 	}
 }

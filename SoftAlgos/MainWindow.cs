@@ -19,16 +19,20 @@
 //  You should have received a copy of the GNU General Public License
 //  along with this program.  If not, see <http://www.gnu.org/licenses/>.
 using System;
+using OpenTK;
 
 namespace SoftAlgos {
 
-	public class MainWindow {
+	public class MainWindow : GameWindow {
 
-		public MainWindow ()
-		{
+		public MainWindow () : base(800,600) {
+			this.Title = "SoftAlgos";
 		}
 
 		public static int Main (string[] args) {
+			using(MainWindow mw = new MainWindow()) {
+				mw.Run();
+			}
 			return 0x00;
 		}
 
