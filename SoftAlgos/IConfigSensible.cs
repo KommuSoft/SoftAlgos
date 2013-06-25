@@ -1,5 +1,5 @@
 //
-//  MeshUtils.cs
+//  IConfigSensible.cs
 //
 //  Author:
 //       Willem Van Onsem <vanonsem.willem@gmail.com>
@@ -22,8 +22,12 @@ using System;
 
 namespace SoftAlgos {
 
-	public static class MeshUtils {
+	public interface IConfigSensible {
+
+		ConfigurationOptions ConfigurationOptions {get;}
+		RenderOptions RenderOptions {get;}
+		PaintOptions PaintOptions {get;}
 
 	}
-
 }
+

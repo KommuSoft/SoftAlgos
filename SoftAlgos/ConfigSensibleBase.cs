@@ -1,5 +1,5 @@
 //
-//  MeshUtils.cs
+//  ConfigSensibleBase.cs
 //
 //  Author:
 //       Willem Van Onsem <vanonsem.willem@gmail.com>
@@ -22,7 +22,31 @@ using System;
 
 namespace SoftAlgos {
 
-	public static class MeshUtils {
+	public class ConfigSensibleBase : IConfigSensible {
+
+		private readonly ConfigurationOptions configurationOptions;
+
+		#region IConfigSensible implementation
+		public ConfigurationOptions ConfigurationOptions {
+			get {
+				return this.configurationOptions;
+			}
+		}
+		public RenderOptions RenderOptions {
+			get {
+				return this.ConfigurationOptions.RenderOptions;
+			}
+		}
+		public PaintOptions PaintOptions {
+			get {
+				return this.ConfigurationOptions.PaintOptions;
+			}
+		}
+		#endregion
+
+		public ConfigSensibleBase (ConfigurationOptions configurationOptions) {
+			this.configurationOptions = configurationOptions;
+		}
 
 	}
 

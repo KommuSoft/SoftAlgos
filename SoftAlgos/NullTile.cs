@@ -1,5 +1,5 @@
 //
-//  MeshUtils.cs
+//  NullTile.cs
 //
 //  Author:
 //       Willem Van Onsem <vanonsem.willem@gmail.com>
@@ -22,8 +22,23 @@ using System;
 
 namespace SoftAlgos {
 
-	public static class MeshUtils {
+	[Tile("Null")]
+	public class NullTile : Tile {
+
+		public NullTile () {
+		}
+
+		#region Tile implementation
+		public Tile Clone (string[] args) {
+			return new NullTile();
+		}
+		#endregion
+		#region IRenderable implementation
+		public void Render (OpenTK.FrameEventArgs e) {
+			throw new System.NotImplementedException ();
+		}
+		#endregion
 
 	}
-
 }
+

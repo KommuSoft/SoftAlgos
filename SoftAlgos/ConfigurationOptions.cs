@@ -1,5 +1,5 @@
 //
-//  MeshUtils.cs
+//  ConfigurationOptions.cs
 //
 //  Author:
 //       Willem Van Onsem <vanonsem.willem@gmail.com>
@@ -22,8 +22,26 @@ using System;
 
 namespace SoftAlgos {
 
-	public static class MeshUtils {
+	public class ConfigurationOptions {
 
+		private PaintOptions paintOptions;
+		private RenderOptions renderOptions;
+
+		public PaintOptions PaintOptions {
+			get {
+				return this.paintOptions;
+			}
+		}
+		public RenderOptions RenderOptions {
+			get {
+				return this.renderOptions;
+			}
+		}
+
+		public ConfigurationOptions () {
+			this.paintOptions = new PaintOptions();
+			this.renderOptions = new RenderOptions();
+		}
 	}
-
 }
+

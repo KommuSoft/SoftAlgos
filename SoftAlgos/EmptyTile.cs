@@ -22,13 +22,14 @@ using System;
 
 namespace SoftAlgos {
 
+	[Tile("Empty")]
 	public class EmptyTile : Tile {
 
 		public EmptyTile () {
 		}
 
 		#region Tile implementation
-		public Tile Clone () {
+		public Tile Clone (string[] args) {
 			return new EmptyTile();
 		}
 		#endregion
@@ -37,10 +38,6 @@ namespace SoftAlgos {
 			throw new System.NotImplementedException ();
 		}
 		#endregion
-
-
-
-
 
 	}
 }

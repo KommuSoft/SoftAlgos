@@ -25,7 +25,7 @@ namespace SoftAlgos {
 
 	public interface Tile : IRenderable {
 
-		Tile Clone ();
+		Tile Clone (string[] args);
 
 	}
 }

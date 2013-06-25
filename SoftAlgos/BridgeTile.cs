@@ -1,5 +1,5 @@
 //
-//  MeshUtils.cs
+//  BridgeTile.cs
 //
 //  Author:
 //       Willem Van Onsem <vanonsem.willem@gmail.com>
@@ -20,9 +20,24 @@
 //  along with this program.  If not, see <http://www.gnu.org/licenses/>.
 using System;
 
-namespace SoftAlgos {
+namespace SoftAlgos
+{
+	public class BridgeTile : Tile {
 
-	public static class MeshUtils {
+		public BridgeTile () {
+
+		}
+
+		#region Tile implementation
+		public Tile Clone (string[] args) {
+			return new BridgeTile();
+		}
+		#endregion
+		#region IRenderable implementation
+		public void Render (OpenTK.FrameEventArgs e) {
+			throw new System.NotImplementedException ();
+		}
+		#endregion
 
 	}
 

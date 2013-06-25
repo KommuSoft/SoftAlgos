@@ -22,9 +22,9 @@ using System;
 
 namespace SoftAlgos {
 
-	public static class PaintOptions {
+	public class PaintOptions {
 
-		public static int TileSize = 50;
+		public int TileSize = 50;
 
 	}
 }

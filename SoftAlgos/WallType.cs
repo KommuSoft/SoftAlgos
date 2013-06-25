@@ -1,5 +1,5 @@
 //
-//  MeshUtils.cs
+//  WallType.cs
 //
 //  Author:
 //       Willem Van Onsem <vanonsem.willem@gmail.com>
@@ -22,8 +22,16 @@ using System;
 
 namespace SoftAlgos {
 
-	public static class MeshUtils {
-
+	[Flags]
+	public enum WallType {
+		North		= 0x01,
+		East		= 0x02,
+		South		= 0x04,
+		West		= 0x08,
+		NorthEast	= 0x10,
+		SouthEast	= 0x20,
+		SouthWest	= 0x40,
+		NorthWest	= 0x80,
 	}
 
 }

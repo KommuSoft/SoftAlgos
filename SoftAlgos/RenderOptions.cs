@@ -1,5 +1,5 @@
 //
-//  MeshUtils.cs
+//  RenderOptions.cs
 //
 //  Author:
 //       Willem Van Onsem <vanonsem.willem@gmail.com>
@@ -22,8 +22,28 @@ using System;
 
 namespace SoftAlgos {
 
-	public static class MeshUtils {
+	public class RenderOptions {
+
+		private double tileSize = 50;
+		private double tileHeight = 25;
+
+		public double TileSize {
+			get {
+				return tileSize;
+			}
+			set {
+				tileSize = value;
+			}
+		}
+		public double TileHeight {
+			get {
+				return tileHeight;
+			}
+			set {
+				tileHeight = value;
+			}
+		}
 
 	}
-
 }
+

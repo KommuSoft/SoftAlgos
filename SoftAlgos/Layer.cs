@@ -19,25 +19,26 @@
 //  You should have received a copy of the GNU General Public License
 //  along with this program.  If not, see <http://www.gnu.org/licenses/>.
 using System;
+using OpenTK;
+using OpenTK.Graphics.OpenGL;
 
 namespace SoftAlgos {
 
-	public class Layer : IRenderable, IPaintable {
+	public class Layer : ConfigSensibleBase, IRenderable, IPaintable {
 
 		private readonly Tile[,] tiles;
 
-		public Layer (int h, int w) {
+		public Layer (ConfigurationOptions options, int h, int w) : base(options) {
 			this.tiles = new Tile[h,w];
 		}
 
 		#region IRenderable implementation
-		public void Render (OpenTK.FrameEventArgs e) {
+		public void Render (FrameEventArgs e) {
 			throw new System.NotImplementedException ();
 		}
 		#endregion
 		#region IPaintable implementation
-		public void Paint (Cairo.Context context)
-		{
+		public void Paint (Cairo.Context context) {
 			throw new System.NotImplementedException ();
 		}
 		#endregion

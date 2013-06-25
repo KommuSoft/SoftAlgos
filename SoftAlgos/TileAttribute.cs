@@ -1,5 +1,5 @@
 //
-//  MeshUtils.cs
+//  TileAttribute.cs
 //
 //  Author:
 //       Willem Van Onsem <vanonsem.willem@gmail.com>
@@ -22,7 +22,20 @@ using System;
 
 namespace SoftAlgos {
 
-	public static class MeshUtils {
+	[AttributeUsage(AttributeTargets.Class)]
+	public class TileAttribute : Attribute {
+
+		private readonly string identifier;
+
+		public string Identifier {
+			get {
+				return this.identifier;
+			}
+		}
+
+		public TileAttribute (string identifier) {
+			this.identifier = identifier;
+		}
 
 	}
 

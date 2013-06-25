@@ -20,27 +20,33 @@
 //  along with this program.  If not, see <http://www.gnu.org/licenses/>.
 using System;
 using System.Collections.Generic;
+using OpenTK;
+using OpenTK.Graphics.OpenGL;
 
 namespace SoftAlgos {
 
-	public class World : IRenderable {
+	public class World : ConfigSensibleBase, IRenderable {
 
 		private readonly List<Layer> layers = new List<Layer>();
 
-		public World (int h, int w) : this(1,h,w) {}
-		public World (int d, int h, int w)
-		{
+		public World (ConfigurationOptions options, int h, int w) : this(options,1,h,w) {}
+		public World (ConfigurationOptions options, int d, int h, int w) : base(options) {
 			for (int i = 0; i < d; i++) {
-				layers.Add(new Layer(h,w));
+				layers.Add(new Layer(options,h,w));
 			}
 		}
 
 		#region IRenderable implementation
-		public void Render (OpenTK.FrameEventArgs e) {
-			throw new System.NotImplementedException ();
+		public void Render (FrameEventArgs e) {
+			double dy = this.RenderOptions.TileHeight;
+			foreach(Layer lay in layers) {
+				GL.Translate(0.0d,dy,0.0d);
+				GL.PushMatrix();
+				lay.Render(e);
+				GL.PopMatrix();
+			}
 		}
 		#endregion
-
 
 	}
 
