@@ -28,13 +28,42 @@ namespace SoftAlgos {
 
 		private readonly Tile[,] tiles;
 
+		public Tile this [int y, int x] {
+			get {
+				return this.tiles[y,x];
+			}
+		}
+		public int Height {
+			get {
+				return this.tiles.GetLength(0);
+			}
+		}
+		public int Width {
+			get {
+				return this.tiles.GetLength(1);
+			}
+		}
+
 		public Layer (ConfigurationOptions options, int h, int w) : base(options) {
 			this.tiles = new Tile[h,w];
 		}
 
 		#region IRenderable implementation
 		public void Render (FrameEventArgs e) {
-			throw new System.NotImplementedException ();
+			double dxy = this.RenderOptions.TileSize;
+			int h = this.Height;
+			int w = this.Width;
+			for(int y = 0; y < h; y++) {
+				for(int x = 0; x < w; x++) {
+					if(tiles[y,x] != null) {
+						GL.PushMatrix();
+						tiles[y,x].Render(e);
+						GL.PopMatrix();
+					}
+					GL.Translate(dxy,0.0d,0,0d);
+				}
+				GL.Translate(-dxy*w,0.0d,dxy);
+			}
 		}
 		#endregion
 		#region IPaintable implementation
@@ -42,7 +71,6 @@ namespace SoftAlgos {
 			throw new System.NotImplementedException ();
 		}
 		#endregion
-
 
 	}
 }
