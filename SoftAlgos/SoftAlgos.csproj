@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
+    <ProductVersion>10.0.0</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{DA61805B-EA1E-44A7-94CF-3A0E9B0F66CE}</ProjectGuid>
+    <OutputType>Exe</OutputType>
+    <RootNamespace>SoftAlgos</RootNamespace>
+    <AssemblyName>SoftAlgos</AssemblyName>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug</OutputPath>
+    <DefineConstants>DEBUG;</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <PlatformTarget>x86</PlatformTarget>
+    <ConsolePause>false</ConsolePause>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
+    <DebugType>none</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release</OutputPath>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <PlatformTarget>x86</PlatformTarget>
+    <ConsolePause>false</ConsolePause>
+  </PropertyGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <ItemGroup>
+    <Compile Include="BasicCommand.cs" />
+    <Compile Include="BasicCondition.cs" />
+    <Compile Include="Command.cs" />
+    <Compile Include="ConditionalCommand.cs" />
+    <Compile Include="InstructionalCommand.cs" />
+    <Compile Include="LoopCommand.cs" />
+    <Compile Include="World.cs" />
+    <Compile Include="Layer.cs" />
+    <Compile Include="Tile.cs" />
+    <Compile Include="EmptyTile.cs" />
+    <Compile Include="Condition.cs" />
+    <Compile Include="IRenderable.cs" />
+    <Compile Include="MainWindow.cs" />
+    <Compile Include="IPaintable.cs" />
+    <Compile Include="PaintOptions.cs" />
+    <Compile Include="WorldReader.cs" />
+    <Compile Include="NormalTile.cs" />
+    <Compile Include="TileItem.cs" />
+    <Compile Include="Cone.cs" />
+    <Compile Include="MeshUtils.cs" />
+    <Compile Include="TileAttribute.cs" />
+    <Compile Include="NullTile.cs" />
+    <Compile Include="WallType.cs" />
+    <Compile Include="BridgeTile.cs" />
+    <Compile Include="RenderOptions.cs" />
+    <Compile Include="IConfigSensible.cs" />
+    <Compile Include="ConfigurationOptions.cs" />
+    <Compile Include="ConfigSensibleBase.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="OpenTK">
+      <HintPath>libs\OpenTK.dll</HintPath>
+    </Reference>
+    <Reference Include="OpenTK.GLControl">
+      <HintPath>libs\OpenTK.GLControl.dll</HintPath>
+    </Reference>
+    <Reference Include="Mono.Cairo" />
+  </ItemGroup>
+</Project>
