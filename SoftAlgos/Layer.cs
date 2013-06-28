@@ -44,8 +44,14 @@ namespace SoftAlgos {
 			}
 		}
 
-		public Layer (ConfigurationOptions options, int h, int w) : base(options) {
-			this.tiles = new Tile[h,w];
+		public Layer (ConfigurationOptions options, int h, int w) : base(options)
+		{
+			this.tiles = new Tile[h, w];
+			for (int y = 0; y < h; y++) {
+				for(int x = 0; x < w; x++) {
+					this.tiles[y,x] = new EmptyTile();
+				}
+			}
 		}
 
 		#region IRenderable implementation
@@ -60,7 +66,7 @@ namespace SoftAlgos {
 						tiles[y,x].Render(e);
 						GL.PopMatrix();
 					}
-					GL.Translate(dxy,0.0d,0,0d);
+					GL.Translate(dxy,0.0d,0.0d);
 				}
 				GL.Translate(-dxy*w,0.0d,dxy);
 			}
