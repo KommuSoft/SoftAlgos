@@ -25,7 +25,7 @@ namespace SoftAlgos {
 
 	public interface IWriteable {
 
-		void Write (StreamWriter sw);
+		void Write (BinaryWriter sw);
 
 	}
 }

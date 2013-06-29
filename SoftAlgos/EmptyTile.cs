@@ -36,8 +36,6 @@ namespace SoftAlgos {
 		#endregion
 		#region IRenderable implementation
 		public void Render (OpenTK.FrameEventArgs e) {
-			throw new System.NotImplementedException ();
-
 			GL.Normal3(0.0d,0.0d,1.0d);
 			GL.Vertex3(1.0d,1.0d,1.0d);
 			GL.Vertex3(-1.0d,1.0d,1.0d);

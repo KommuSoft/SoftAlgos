@@ -25,7 +25,7 @@ namespace SoftAlgos {
 
 	public interface IReadable {
 
-		void Read (StreamReader sw);
+		void Read (BinaryReader sw);
 
 	}
 }
