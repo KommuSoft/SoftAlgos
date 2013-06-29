@@ -66,6 +66,11 @@
     <Compile Include="ITimesensitive.cs" />
     <Compile Include="TimeSensitiveBase.cs" />
     <Compile Include="Utils.cs" />
+    <Compile Include="ModelReader.cs" />
+    <Compile Include="Model.cs" />
+    <Compile Include="IWriteable.cs" />
+    <Compile Include="IReadable.cs" />
+    <Compile Include="IReadWriteable.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="OpenTK">

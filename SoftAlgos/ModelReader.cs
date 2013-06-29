@@ -1,5 +1,5 @@
 //
-//  EmptyTile.cs
+//  ModelReader.cs
 //
 //  Author:
 //       Willem Van Onsem <vanonsem.willem@gmail.com>
@@ -19,33 +19,59 @@
 //  You should have received a copy of the GNU General Public License
 //  along with this program.  If not, see <http://www.gnu.org/licenses/>.
 using System;
-using OpenTK.Graphics.OpenGL;
+using System.Collections.Generic;
 
 namespace SoftAlgos {
 
-	[Tile("Empty")]
-	public class EmptyTile : Tile {
+	public class ModelReader {
 
-		public EmptyTile () {
-		}
+		public ModelReader () {
 
-		#region Tile implementation
-		public Tile Clone (string[] args) {
-			return new EmptyTile();
 		}
-		#endregion
-		#region IRenderable implementation
-		public void Render (OpenTK.FrameEventArgs e) {
-			throw new System.NotImplementedException ();
-
-			GL.Normal3(0.0d,0.0d,1.0d);
-			GL.Vertex3(1.0d,1.0d,1.0d);
-			GL.Vertex3(-1.0d,1.0d,1.0d);
-			GL.Vertex3(-1.0d,-1.0d,1.0d);
-			GL.Vertex3(1.0d,-1.0d,1.0d);
-		}
-		#endregion
 
 	}
-}
 
+	[AttributeUsage(AttributeTargets.Class)]
+	public class ModelChunkAttribute : Attribute {
+
+		private int type;
+
+	}
+
+	public abstract class ModelChunk {
+
+		private int selfLength = 0x00;
+		private List<ModelChunk> children;
+
+		public int SelfLength {
+			get {
+				return this.selfLength;
+			}
+			protected set {
+				this.selfLength = value;
+			}
+		}
+		public int Size {
+			get {
+				int val = this.selfLength + sizeof(int) + children;
+				foreach (ModelChunk child in this.children) {
+					val += child.Size;
+				}
+				return val;
+			}
+		}
+
+		public void AddChild (ModelChunk child) {
+			this.children.Add(child);
+		}
+
+
+	}
+
+	public class ByteArrayChunk : ModelChunk {
+
+
+
+	}
+
+}

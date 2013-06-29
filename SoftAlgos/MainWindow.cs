@@ -28,12 +28,14 @@ namespace SoftAlgos {
 
 		private Matrix4 perspective;
 		private Camera camera = new Camera();
-		private readonly float[][] l0 = new float[][] {	new float[] {-20.5f,7.0f,-7.0f},
-														new float[] {0.1f,0.1f,0.1f,0.1f},
-														new float[] {1.0f,1.0f,0.8627f,1.0f},
-														new float[] {1.0f,1.0f,0.8627f,1.0f},
-														new float[] {1.0f,1.0f,1.0f,1.0f},
-														new float[] {0.0f,0.0f,0.0f,0.0f}};
+		private readonly float[][] l0 = new float[][] {	new float[] {-20.5f,7.0f,-7.0f},//l0P
+														new float[] {0.1f,0.1f,0.1f,0.1f},//l0A
+														new float[] {1.0f,1.0f,0.8627f,1.0f},//l0D//0.8f,0.8f,0.8f,0.8f
+														new float[] {1.0f,1.0f,0.8627f,1.0f},//l0S
+														new float[] {1.0f,1.0f,1.0f,1.0f},//l0O
+														new float[] {0.0f,0.0f,0.0f,0.0f}};//l0M
+		
+		private static float[] materialSpecular = { 0.8f, 0.8f, 0.8f, 1.0f };
 		private static float[] surfaceShininess = { 96.0f };
 
 		public MainWindow () : base(800,600) {
@@ -44,15 +46,46 @@ namespace SoftAlgos {
 			base.OnRenderFrame(e);
 			TimeSensitiveBase.AdvanceTimeAllItems(e.Time);
 			GL.Clear(ClearBufferMask.ColorBufferBit|ClearBufferMask.DepthBufferBit);
-			GL.LoadIdentity();
 			this.camera.Render(e);
+			GL.Color3(1.0d,1.0d,1.0d);
+			GL.Begin(BeginMode.Quads);
+			GL.Normal3(0.0d,0.0d,-1.0d);
+			GL.Vertex3(-1.0d,1.0d,-1.0d);
+			GL.Vertex3(1.0d,1.0d,-1.0d);
+			GL.Vertex3(1.0d,-1.0d,-1.0d);
+			GL.Vertex3(-1.0d,-1.0d,-1.0d);
+
+			GL.Normal3(-1.0d,0.0d,0.0d);
+			GL.Vertex3(-1.0d,1.0d,-1.0d);
+			GL.Vertex3(-1.0d,1.0d,1.0d);
+			GL.Vertex3(-1.0d,-1.0d,1.0d);
+			GL.Vertex3(-1.0d,-1.0d,-1.0d);
+
+			GL.Normal3(1.0d,0.0d,0.0d);
+			GL.Vertex3(1.0d,1.0d,-1.0d);
+			GL.Vertex3(1.0d,1.0d,1.0d);
+			GL.Vertex3(1.0d,-1.0d,1.0d);
+			GL.Vertex3(1.0d,-1.0d,-1.0d);
+
+			GL.Normal3(0.0d,-1.0d,0.0d);
+			GL.Vertex3(-1.0d,-1.0d,-1.0d);
+			GL.Vertex3(-1.0d,-1.0d,1.0d);
+			GL.Vertex3(1.0d,-1.0d,1.0d);
+			GL.Vertex3(1.0d,-1.0d,-1.0d);
+
+			GL.Normal3(0.0d,1.0d,0.0d);
+			GL.Vertex3(-1.0d,1.0d,-1.0d);
+			GL.Vertex3(-1.0d,1.0d,1.0d);
+			GL.Vertex3(1.0d,1.0d,1.0d);
+			GL.Vertex3(1.0d,1.0d,-1.0d);
+			GL.End();
 			GL.Flush();
 			this.SwapBuffers();
 		}
 
 		protected override void OnLoad (EventArgs e) {
 			base.OnLoad(e);
-			this.WindowState = WindowState.Fullscreen;
+			//this.WindowState = WindowState.Fullscreen;
 			GL.Enable(EnableCap.DepthTest);
 			GL.Enable(EnableCap.CullFace);
 			GL.Enable(EnableCap.Lighting);
@@ -74,13 +107,15 @@ namespace SoftAlgos {
 			this.Mouse.Move += this.camera.OnMouseMove;
 			this.Mouse.ButtonDown += this.camera.OnMouseDown;
 			this.Mouse.ButtonUp += this.camera.OnMouseUp;
+			this.Mouse.WheelChanged += this.camera.OnMouseWheel;
 		}
 
 		protected override void OnResize (EventArgs e) {
 			base.OnResize(e);
 			GL.Viewport(this.ClientRectangle);
-			float temp = (float)this.Width/(float)this.Height;
-			this.perspective = Matrix4.CreatePerspectiveFieldOfView(0.25f*(float)Math.PI, temp, 1.0f, 64.0f);
+			float temp = (float)this.Height/(float)this.Width;
+			this.perspective = Matrix4.CreatePerspectiveFieldOfView(0.125f*(float)Math.PI, temp, 0.001f, 64000.0f);
+			GL.MatrixMode(MatrixMode.Projection);
 			GL.LoadMatrix(ref perspective);
 			GL.MatrixMode(MatrixMode.Modelview);
 			base.OnResize (e);

@@ -1,5 +1,5 @@
 //
-//  EmptyTile.cs
+//  IReadWriteable.cs
 //
 //  Author:
 //       Willem Van Onsem <vanonsem.willem@gmail.com>
@@ -19,33 +19,10 @@
 //  You should have received a copy of the GNU General Public License
 //  along with this program.  If not, see <http://www.gnu.org/licenses/>.
 using System;
-using OpenTK.Graphics.OpenGL;
 
 namespace SoftAlgos {
 
-	[Tile("Empty")]
-	public class EmptyTile : Tile {
-
-		public EmptyTile () {
-		}
-
-		#region Tile implementation
-		public Tile Clone (string[] args) {
-			return new EmptyTile();
-		}
-		#endregion
-		#region IRenderable implementation
-		public void Render (OpenTK.FrameEventArgs e) {
-			throw new System.NotImplementedException ();
-
-			GL.Normal3(0.0d,0.0d,1.0d);
-			GL.Vertex3(1.0d,1.0d,1.0d);
-			GL.Vertex3(-1.0d,1.0d,1.0d);
-			GL.Vertex3(-1.0d,-1.0d,1.0d);
-			GL.Vertex3(1.0d,-1.0d,1.0d);
-		}
-		#endregion
-
+	public interface IReadWriteable : IReadable, IWriteable {
 	}
-}
 
+}

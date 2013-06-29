@@ -136,18 +136,16 @@ namespace SoftAlgos {
 		}
 
 		public override void AdvanceTime (double dt) {
-			double zoomFactor = Math.Min(1.0f,Math.Max(0.0f,(double) (this.zoomSpeed*dt)));
-			double rotateFactor = Math.Min(1.0f,Math.Max(0.0f,(double) (this.rotateSpeed*dt)));
-			double translateFactor = Math.Min(1.0f,Math.Max(0.0f,(double) (this.translateSpeed*dt)));
-			this.rotateXZ = rotateFactor*this.rotateXZTarget+(1.0f-rotateFactor)*this.rotateXZ;
-			this.rotateY = rotateFactor*this.rotateYTarget+(1.0f-rotateFactor)*this.rotateY;
-			this.zoom = zoomFactor*this.zoomTarget+(1.0f-zoomFactor)*this.zoom;
-			this.translate.X *= 1.0d-translateFactor;
-			this.translate.Y *= 1.0d-translateFactor;
-			this.translate.Z *= 1.0d-translateFactor;
-			this.translate.X += translateFactor*this.translateTarget.X;
-			this.translate.Y += translateFactor*this.translateTarget.Y;
-			this.translate.Z += translateFactor*this.translateTarget.Z;
+			double zF = Utils.Border(0.0d,(double) (this.zoomSpeed*dt),1.0d);
+			double rF = Utils.Border(0.0d,(double) (this.rotateSpeed*dt),1.0d);
+			double tF = Utils.Border(0.0d,(double) (this.translateSpeed*dt),1.0d);
+			double tFa = 1.0d-tF;
+			this.rotateXZ = rF*this.rotateXZTarget+(1.0f-rF)*this.rotateXZ;
+			this.rotateY = rF*this.rotateYTarget+(1.0f-rF)*this.rotateY;
+			this.zoom = zF*this.zoomTarget+(1.0f-zF)*this.zoom;
+			this.translate.X = tFa*this.translate.X+tF*this.translateTarget.X;
+			this.translate.Y = tFa*this.translate.Y+tF*this.translateTarget.Y;
+			this.translate.Z = tFa*this.translate.Z+tF*this.translateTarget.Z;
 		}
 
 		public void Render (FrameEventArgs e) {
