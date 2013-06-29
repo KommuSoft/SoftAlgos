@@ -63,6 +63,9 @@
     <Compile Include="VisualizerWidget.cs" />
     <Compile Include="Camera.cs" />
     <Compile Include="Point2d.cs" />
+    <Compile Include="ITimesensitive.cs" />
+    <Compile Include="TimeSensitiveBase.cs" />
+    <Compile Include="Utils.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="OpenTK">
@@ -77,5 +80,8 @@
       <Package>gtk-sharp-2.0</Package>
     </Reference>
     <Reference Include="System.Drawing" />
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data" />
   </ItemGroup>
 </Project>

@@ -26,23 +26,48 @@ using OpenTK.Graphics.OpenGL;
 
 namespace SoftAlgos {
 
-	public class Camera : IRenderable {
+	public class Camera : TimeSensitiveBase, IRenderable {
 
-		private double zoomSpeed = 5.0f;
-		private double rotateSpeed = 5.0f;
+		private double zoomSpeed = 5.0d;
+		private double rotateSpeed = 5.0d;
+		private double translateSpeed = 5.0d;
 		private double zoom = 0.5f;
 		private double rotateXZ = 0.0f;
-		private double rotateY = 0.0f;
+		private double rotateY = 30.0f;
 		private double zoomTarget = 0.5f;
 		private double rotateXZTarget = 0.0f;
 		private double rotateYTarget = 0.0f;
 		private bool mouseDown = false;
 		private Point2d offsetPoint = Point2d.Empty;
+		private Vector3d translate = new Vector3d(0.0d,0.0d,-6.0d);
+		private Vector3d translateTarget = new Vector3d(0.0d,0.0d,-6.0d);
 		private double rotateXYOffset, rotateZOffset;
-		private double[,] savedCameraPositions;//saved cameraPositions
-		private int showingView = 0x01;
 		
 		
+		public double ZoomSpeed {
+			get {
+				return this.zoomSpeed;
+			}
+			set {
+				this.zoomSpeed = value;
+			}
+		}
+		public double RotateSpeed {
+			get {
+				return this.rotateSpeed;
+			}
+			set {
+				this.rotateSpeed = value;
+			}
+		}
+		public double TranslateSpeed {
+			get {
+				return this.translateSpeed;
+			}
+			set {
+				this.translateSpeed = value;
+			}
+		}
 		public double RotateXZ {
 			get {
 				return this.rotateXZ;
@@ -56,6 +81,14 @@ namespace SoftAlgos {
 		public double Zoom {
 			get {
 				return this.zoom;
+			}
+		}
+		public Vector3d Translate {
+			get {
+				return this.translate;
+			}
+			set {
+				this.translate = value;
 			}
 		}
 		public double RotateXZTarget {
@@ -90,64 +123,41 @@ namespace SoftAlgos {
 				this.zoomTarget = value;
 			}
 		}
+		public Vector3d TranslateTarget {
+			get {
+				return this.translateTarget;
+			}
+			set {
+				this.translateTarget = value;
+			}
+		}
 		
 		public Camera () {
-			savedCameraPositions = new double[,] {//RotateXZ, RotateY, Zoom
-				{	60.0f,		0.0f,		0.5f},//silver saved
-				{	60.0f,		180.0f,		0.5f}//red saved
-			};
-			this.MoveToOwner(0x00);
 		}
-		
-		private void changeCameraView (int newView) {
-			this.SaveCameraPosition(this.showingView);
-			this.showingView = newView;
-			this.LoadSavedCameraPosition(this.showingView);
-		}
-		public void Render (FrameEventArgs e) {
-			GL.MatrixMode(MatrixMode.Modelview);
-			double zoomFactor = Math.Min(1.0f,Math.Max(0.0f,(double) (this.zoomSpeed*e.Time)));
-			double rotateFactor = Math.Min(1.0f,Math.Max(0.0f,(double) (this.rotateSpeed*e.Time)));
+
+		public override void AdvanceTime (double dt) {
+			double zoomFactor = Math.Min(1.0f,Math.Max(0.0f,(double) (this.zoomSpeed*dt)));
+			double rotateFactor = Math.Min(1.0f,Math.Max(0.0f,(double) (this.rotateSpeed*dt)));
+			double translateFactor = Math.Min(1.0f,Math.Max(0.0f,(double) (this.translateSpeed*dt)));
 			this.rotateXZ = rotateFactor*this.rotateXZTarget+(1.0f-rotateFactor)*this.rotateXZ;
 			this.rotateY = rotateFactor*this.rotateYTarget+(1.0f-rotateFactor)*this.rotateY;
 			this.zoom = zoomFactor*this.zoomTarget+(1.0f-zoomFactor)*this.zoom;
+			this.translate.X *= 1.0d-translateFactor;
+			this.translate.Y *= 1.0d-translateFactor;
+			this.translate.Z *= 1.0d-translateFactor;
+			this.translate.X += translateFactor*this.translateTarget.X;
+			this.translate.Y += translateFactor*this.translateTarget.Y;
+			this.translate.Z += translateFactor*this.translateTarget.Z;
+		}
+
+		public void Render (FrameEventArgs e) {
 			GL.LoadIdentity();
-			GL.Translate(0.0f,0.0f,-6.0f);
+			GL.Translate(this.translate);
 			GL.Rotate(rotateXZ,1.0f,0.0f,0.0f);
 			GL.Rotate(rotateY,0.0f,1.0f,0.0f);
 			GL.Scale(zoom,zoom,zoom);
 		}
-		public void SaveCameraPosition (int index) {
-			if((index&0xfc) == 0x00) {
-				savedCameraPositions[index,0x00] = this.rotateXZTarget;
-				savedCameraPositions[index,0x01] = this.rotateYTarget;
-				savedCameraPositions[index,0x02] = this.zoomTarget;
-			}
-		}
-		public void LoadSavedCameraPosition (int index) {
-			if((index&0xfc) == 0x00) {
-				this.RotateXZTarget = savedCameraPositions[index,0x00];
-				this.RotateYTarget = savedCameraPositions[index,0x01];
-				this.ZoomTarget = savedCameraPositions[index,0x02];
-			}
-		}
-		public void MoveToOwner (int index) {
-			this.ZoomTarget = 0.5f;
-			switch (index) {
-				case 0x00 :
-					this.RotateXZTarget = 30.0f;
-					this.RotateYTarget = 0.0f;
-					break;
-				case 0x01 :
-					this.RotateXZTarget = 30.0f;
-					this.RotateYTarget = 180.0f;
-					break;
-				case 0x02 :
-					this.RotateXZTarget = 90.0f;
-					this.RotateYTarget = 90.0f;
-					break;
-			}
-		}
+
 		public void MoveToPerspective () {
 			this.RotateXZTarget = 45.0f;
 			this.RotateYTarget = -45.0f;
@@ -158,17 +168,17 @@ namespace SoftAlgos {
 		}
 		public void OnKeyDown (object s, KeyboardKeyEventArgs e) {
 			switch(e.Key) {
-				case Key.F1 :
-					this.MoveToOwner(0x00);
+				case Key.Up :
+					this.translateTarget.Z += 1.0d;
 					break;
-				case Key.F2 :
-					this.MoveToOwner(0x01);
+				case Key.Down :
+					this.translateTarget.Z -= 1.0d;
 					break;
-				case Key.F3 :
-					this.MoveToOwner(0x02);
+				case Key.Left :
+					this.translateTarget.X -= 1.0d;
 					break;
-				case Key.F4 :
-					this.MoveToPerspective();
+				case Key.Right :
+					this.translateTarget.X += 1.0d;
 					break;
 			}
 		}
@@ -180,7 +190,6 @@ namespace SoftAlgos {
 		}
 		public void OnMouseDown (object s, MouseButtonEventArgs e) {
 			if(e.Button == MouseButton.Right) {
-				//stand still
 				this.RotateXZTarget = this.rotateXZ;
 				this.RotateYTarget = this.rotateY;
 				this.ZoomTarget = this.zoom;
