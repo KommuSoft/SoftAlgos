@@ -1,5 +1,5 @@
 //
-//  Model.cs
+//  ModelCollection.cs
 //
 //  Author:
 //       Willem Van Onsem <vanonsem.willem@gmail.com>
@@ -19,32 +19,35 @@
 //  You should have received a copy of the GNU General Public License
 //  along with this program.  If not, see <http://www.gnu.org/licenses/>.
 using System;
-using OpenTK;
-using OpenTK.Graphics.OpenGL;
+using System.Collections.Generic;
 
 namespace SoftAlgos {
 
-	public class Model : IRenderable {
+	public class ModelCollection {
 
-		private readonly string name;
+		private readonly Dictionary<string,Model> models = new Dictionary<string,Model>();
 
-		public string Name {
+		public Model this [string name] {
 			get {
-				return this.name;
+				Model model;
+				if(models.TryGetValue(name,out model)) {
+					return model;
+				}
+				else {
+					return null;
+				}
 			}
 		}
 
-		public Model (string name) {
-			this.name = name;
+		public ModelCollection () {
 		}
 
-		#region IRenderable implementation
-		public void Render (FrameEventArgs e) {
-			//GL.EnableClientState(ArrayCap.VertexArray);
+		public void AddModel (Model model) {
+			if(model != null && !this.models.ContainsKey(model.Name)) {
+				this.models.Add(model.Name,model);
+			}
 		}
-		#endregion
-
 
 	}
-
 }
+

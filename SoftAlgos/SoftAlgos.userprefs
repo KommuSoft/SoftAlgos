@@ -1,37 +1,13 @@
 ﻿<Properties GitUserInfo="UsingGIT">
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug|x86" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Camera.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="ModelReader.cs">
     <Files>
-      <File FileName="BasicCommand.cs" Line="33" Column="8" />
-      <File FileName="InstructionalCommand.cs" Line="28" Column="24" />
-      <File FileName="BasicCondition.cs" Line="1" Column="1" />
-      <File FileName="Command.cs" Line="27" Column="5" />
-      <File FileName="ConditionalCommand.cs" Line="29" Column="4" />
-      <File FileName="LoopCommand.cs" Line="28" Column="32" />
-      <File FileName="World.cs" Line="46" Column="20" />
-      <File FileName="Layer.cs" Line="43" Column="27" />
-      <File FileName="Tile.cs" Line="28" Column="16" />
-      <File FileName="EmptyTile.cs" Line="31" Column="3" />
-      <File FileName="Condition.cs" Line="27" Column="3" />
-      <File FileName="IRenderable.cs" Line="22" Column="14" />
-      <File FileName="MainWindow.cs" Line="85" Column="23" />
-      <File FileName="IPaintable.cs" Line="28" Column="30" />
-      <File FileName="PaintOptions.cs" Line="27" Column="9" />
-      <File FileName="WorldReader.cs" Line="27" Column="25" />
-      <File FileName="NormalTile.cs" Line="27" Column="24" />
-      <File FileName="Cone.cs" Line="27" Column="18" />
-      <File FileName="TileItem.cs" Line="25" Column="2" />
-      <File FileName="MeshUtils.cs" Line="26" Column="1" />
-      <File FileName="TileAttribute.cs" Line="25" Column="42" />
-      <File FileName="NullTile.cs" Line="33" Column="19" />
-      <File FileName="WallType.cs" Line="34" Column="19" />
-      <File FileName="BridgeTile.cs" Line="33" Column="21" />
-      <File FileName="RenderOptions.cs" Line="1" Column="1" />
-      <File FileName="IConfigSensible.cs" Line="29" Column="35" />
-      <File FileName="ConfigurationOptions.cs" Line="40" Column="3" />
-      <File FileName="ConfigSensibleBase.cs" Line="46" Column="3" />
-      <File FileName="Camera.cs" Line="156" Column="40" />
-      <File FileName="Point2d.cs" Line="53" Column="16" />
+      <File FileName="ModelReader.cs" Line="328" Column="35" />
+      <File FileName="IReadable.cs" Line="28" Column="26" />
+      <File FileName="IWriteable.cs" Line="28" Column="27" />
+      <File FileName="EmptyTile.cs" Line="37" Column="24" />
+      <File FileName="ModelCollection.cs" Line="1" Column="1" />
+      <File FileName="Model.cs" Line="35" Column="41" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

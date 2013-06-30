@@ -1,0 +1,15 @@
+ModelCollection						(10000000)
+	*Model							(11000000)	Models
+		*Frame						(11100000)	Frames
+			-Int								Index
+			Structure				(11110000)	Structures
+				-Int							Texture
+				*ModelData			(11111000)	DataStreams
+					-ModelDataPurpose				Purpose
+					-Int							Offset
+					-Int							Stride
+		*Action						(11200000)
+			String					(f0000001)	Name
+		*Texture					(11300000)	Textures
+			-Int								Index
+		String						(f0000001)	Name

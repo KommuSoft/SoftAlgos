@@ -71,6 +71,7 @@
     <Compile Include="IWriteable.cs" />
     <Compile Include="IReadable.cs" />
     <Compile Include="IReadWriteable.cs" />
+    <Compile Include="ModelCollection.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="OpenTK">
@@ -88,5 +89,8 @@
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Data" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="ModelFileStructure.txt" />
   </ItemGroup>
 </Project>
