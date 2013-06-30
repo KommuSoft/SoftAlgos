@@ -154,7 +154,7 @@ namespace SoftAlgos {
 
 		public abstract class ModelChunkWithChildren : ModelChunk {
 
-			private List<ModelChunk> children;
+			private readonly List<ModelChunk> children = new List<ModelChunk>();
 
 			public override int Size {
 				get {
