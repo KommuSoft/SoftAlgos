@@ -1,13 +1,8 @@
 ﻿<Properties GitUserInfo="UsingGIT">
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug|x86" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="ModelReader.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Camera.cs">
     <Files>
-      <File FileName="ModelReader.cs" Line="328" Column="35" />
-      <File FileName="IReadable.cs" Line="28" Column="26" />
-      <File FileName="IWriteable.cs" Line="28" Column="27" />
-      <File FileName="EmptyTile.cs" Line="37" Column="24" />
-      <File FileName="ModelCollection.cs" Line="1" Column="1" />
-      <File FileName="Model.cs" Line="35" Column="41" />
+      <File FileName="Camera.cs" Line="195" Column="41" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

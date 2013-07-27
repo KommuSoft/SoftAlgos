@@ -39,15 +39,17 @@ namespace SoftAlgos {
 		private static float[] surfaceShininess = { 96.0f };
 
 		public MainWindow () : base(800,600) {
-			this.Title = "SoftAlgos";
+			this.Title = "SoftAlgos v. 0.1";
 		}
 
 		protected override void OnRenderFrame (FrameEventArgs e) {
 			base.OnRenderFrame(e);
 			TimeSensitiveBase.AdvanceTimeAllItems(e.Time);
 			GL.Clear(ClearBufferMask.ColorBufferBit|ClearBufferMask.DepthBufferBit);
+
 			this.camera.Render(e);
 			GL.Color3(1.0d,1.0d,1.0d);
+
 			GL.Begin(BeginMode.Quads);
 			GL.Normal3(0.0d,0.0d,-1.0d);
 			GL.Vertex3(-1.0d,1.0d,-1.0d);
